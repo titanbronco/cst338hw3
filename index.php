@@ -40,6 +40,9 @@ $nameErr = $champErr = $skinErr = $bgErr = "";
             League Champion Vending Machine
         </title>
         
+        <style>
+            @import url("css/styles.css");
+        </style>
         
         
     </head>
@@ -48,11 +51,24 @@ $nameErr = $champErr = $skinErr = $bgErr = "";
         <?php
         if(empty($_GET["name"])){
             echo "Please fill out the information to see your champion!";
+            echo "
+            <style>
+                body{
+                    background-image: url('images/bg.png');
+                }
+            </style>";
         }
+        
+        
         else{
+            
             echo "<body style='background-color:$color'>";
             
+            echo "<div>";
+            
             echo "Hello, $name! Witness the champion that is $champ!";
+            
+            echo "</div>";
             
             if($skin == "Skin"){
                 echo "<img src='images/$champ$skin.jpg'>";
@@ -94,7 +110,7 @@ $nameErr = $champErr = $skinErr = $bgErr = "";
                 <option>orange</option>
             </select>
             <span class="error">* <?php echo $bgErr;?></span>
-            <input type= "submit" value="Search" />
+            <input type= "submit" value="Submit" />
         </form>
         
     </body>
