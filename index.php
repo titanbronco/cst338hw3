@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 
 <?php
-if(isset($_GET["name"]) && isset($_GET["category"]) && isset($_GET["skin"]) && isset($_GET["bgcolor"])){
-    $name = $_GET["name"];
-    $champ = $_GET["category"];
-    $skin = $_GET["skin"];
-    $color = $_GET["bgcolor"];
-}
+if(isset($_GET["name"]) && isset($_GET["category"]) && isset($_GET["bgcolor"])){
+    
+    
+// define variables and set to empty values
+$nameErr = $champErr = $skinErr = $bgErr = "";
 
+  if (empty($_GET["name"])) {
+    $nameErr = "Name is required";
+  } else {
+    $name = $_GET["name"];
+  }
+
+  if (empty($_GET["category"])) {
+    $champErr = "Champion is required";
+  } else {
+    $champ = $_GET["category"];
+  }
+
+  if (empty($_GET["skin"])) {
+    $skinErr = "Skin or no skin?!";
+  } else {
+    $skin = $_GET["skin"];
+  }
+
+  if (empty($_GET["bgcolor"])) {
+    $bgErr = "Background color is required";
+  } else {
+    $color = $_GET["bgcolor"];
+  }
+
+}
 ?>
+    
 <html>
     <head>
         <title>
@@ -21,7 +46,7 @@ if(isset($_GET["name"]) && isset($_GET["category"]) && isset($_GET["skin"]) && i
     
     <body>
         <?php
-        if(!isset($_GET["name"])){
+        if(empty($_GET["name"])){
             echo "Please fill out the information to see your champion!";
         }
         else{
@@ -40,7 +65,8 @@ if(isset($_GET["name"]) && isset($_GET["category"]) && isset($_GET["skin"]) && i
         ?>
         
         <form method="get">
-            <input type= "text" name="name" placeholder="Summoner Name" value="<?=$_GET['keyword']?>" />
+            <input type= "text" name="name" placeholder="Summoner Name" />
+            <span class="error">* <?php echo $nameErr;?></span>
            
             <select name = "category">
                 <option value = "">Select Champion</option>
@@ -51,9 +77,12 @@ if(isset($_GET["name"]) && isset($_GET["category"]) && isset($_GET["skin"]) && i
                 <option>nami</option>
                 <option>kayn</option>
             </select>
+            <span class="error">* <?php echo $champErr;?></span>
             
             <input type="radio" name="skin" value="Skin"> Skin
+            <span class="error">* <?php echo $skinErr;?></span>
             <input type="radio" name="skin" value="noSkin"> No Skin
+            <span class="error">* <?php echo $skinErr;?></span>
   
             
             <select name = "bgcolor">
@@ -64,6 +93,7 @@ if(isset($_GET["name"]) && isset($_GET["category"]) && isset($_GET["skin"]) && i
                 <option>yellow</option>
                 <option>orange</option>
             </select>
+            <span class="error">* <?php echo $bgErr;?></span>
             <input type= "submit" value="Search" />
         </form>
         
